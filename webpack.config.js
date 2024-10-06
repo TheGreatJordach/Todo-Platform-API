@@ -2,6 +2,7 @@ import path from "path";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import nodeExternals from "webpack-node-externals";
 import TerserPlugin from "terser-webpack-plugin";
+import { codecovWebpackPlugin } from "@codecov/webpack-plugin";
 
 module.exports = {
   entry: "./src/main.ts",
@@ -40,6 +41,11 @@ module.exports = {
     type: "filesystem", // Uses filesystem-based cache to store build output
   },
   plugins: [
+    codecovWebpackPlugin({
+      enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+      bundleName: "example-webpack-bundle",
+      uploadToken: process.env.CODECOV_TOKEN,
+    }),
     new webpack.HotModuleReplacementPlugin(), //not tested
     new ForkTsCheckerWebpackPlugin({
       async: false, // Runs type checking in parallel

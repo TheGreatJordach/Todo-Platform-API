@@ -26,8 +26,7 @@
 
 ## Description Todo List API
 
-![](project/todo-list-api-bsrdd.png)
-
+<img src="project/todo-list-api-bsrdd.png" alt="NPM Version" />
 
 In this project we are required to develop a RESTful API to allow users to manage their to-do list. 
 The backend projects will require you to implement:
@@ -60,6 +59,11 @@ We are required to develop a RESTful API with following endpoints
 6. Use a database to store the user and to-do list data (you can use any database of your choice)
 7. Implement proper data validation
 8. Implement pagination and filtering for the to-do list
+
+###  Solution overview
+
+<img src="project/project-overview.png" alt="NPM Version" />
+
 
 ## Installation
 
