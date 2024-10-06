@@ -92,5 +92,6 @@ export function ValidatedEnv(config: Record<string, unknown>) {
     throw new InternalServerErrorException();
   }
   logger.log("😎 Environment Validation successfully validated 🍉");
+
   return validated;
 }
