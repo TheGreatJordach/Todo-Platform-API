@@ -67,6 +67,11 @@ export class ValidateEnvironment {
   @IsInt()
   @IsPositive()
   APP_PORT: number;
+
+  // BcryptProvider
+  @IsInt()
+  @IsPositive()
+  SALT_ROUND: number;
 }
 
 /**

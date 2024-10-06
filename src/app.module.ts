@@ -4,9 +4,16 @@ import { UsersModule } from "./users/users.module";
 import { TodoModule } from "./todo/todo.module";
 import { IamModule } from "./iam/iam.module";
 import { APP_PIPE } from "@nestjs/core";
+import { TransactionsModule } from "./transactions/transactions.module";
 
 @Module({
-  imports: [ConfigurationModule, UsersModule, TodoModule, IamModule],
+  imports: [
+    ConfigurationModule,
+    UsersModule,
+    TodoModule,
+    IamModule,
+    TransactionsModule,
+  ],
   controllers: [],
   providers: [
     {
