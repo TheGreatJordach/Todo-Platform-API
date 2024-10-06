@@ -40,6 +40,7 @@
     "rxjs": "^7.8.1",
     "supabase": "^1.200.3",
     "swagger-ui-express": "^5.0.1",
+    "terser-webpack-plugin": "^5.3.10",
     "typeorm": "^0.3.20",
     "vercel": "^37.6.1",
     "webpack": "^5.95.0",
@@ -47,6 +48,7 @@
     "webpack-node-externals": "^3.0.0"
   },
   "devDependencies": {
+    "@codecov/webpack-plugin": "^1.2.0",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",

@@ -1,9 +1,25 @@
-import { Module } from "@nestjs/common";
+import { Module, ValidationPipe } from "@nestjs/common";
 import { ConfigurationModule } from "./configuration/configuration.module";
+import { UsersModule } from "./users/users.module";
+import { TodoModule } from "./todo/todo.module";
+import { IamModule } from "./iam/iam.module";
+import { APP_PIPE } from "@nestjs/core";
 
 @Module({
-  imports: [ConfigurationModule],
+  imports: [ConfigurationModule, UsersModule, TodoModule, IamModule],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        whitelist: true,
+        transform: true,
+        forbidNonWhitelisted: true,
+        transformOptions: {
+          enableImplicitConversion: true,
+        },
+      }),
+    },
+  ],
 })
 export class AppModule {}
