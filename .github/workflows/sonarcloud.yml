@@ -1,20 +1,126 @@
-name: Build
+name: Build and Test
+
 on:
   push:
     branches:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
 jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run build
+        run: yarn build
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install PostgreSQL client
+        run: sudo apt-get install postgresql-client
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Set up environment variables for RDS
+        run: |
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
+          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+
+      - name: Test connection to PostgreSQL
+        run: psql -h ${{ secrets.DB_HOST }} -U ${{ secrets.DB_USER }} -d ${{ secrets.DB_NAME }} -c "\dt"
+
+      - name: Run unit tests
+        run: yarn run test
+
+      - name: Run e2e tests
+        run: yarn run test:e2e
+
+      - name: Run test coverage
+        run: yarn run test:cov
+
+  codeCov:
+    name: Upload coverage to Codecov
+    needs: test
+    uses: codecov/codecov-action@v4
+    with:
+      token: ${{ secrets.CODECOV_TOKEN }}
+      files: ./coverage/lcov.info
+      flags: unittests
+      name: codecov-umbrella
+      fail_ci_if_error: true
+
   sonarcloud:
     name: SonarCloud
     runs-on: ubuntu-latest
+    needs: [codeCov]
+    if: success()
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  vercel_deploy:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    needs: sonarcloud
+    if: success()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
+
+  documentation:
+    name: Build Documentation
+    runs-on: ubuntu-latest
+    needs: vercel_deploy
+    if: success()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Generate documentation
+        run: yarn run docs
+
+      - name: Deploy documentation
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
