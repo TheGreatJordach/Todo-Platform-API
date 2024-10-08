@@ -72,6 +72,19 @@ export class ValidateEnvironment {
   @IsInt()
   @IsPositive()
   SALT_ROUND: number;
+
+  @IsNotEmpty()
+  @IsString()
+  JWT_SECRET: string;
+  @IsNotEmpty()
+  @IsString()
+  JWT_TOKEN_AUDIENCE: string;
+  @IsNotEmpty()
+  @IsString()
+  JWT_TOKEN_ISSUER: string;
+  @IsInt()
+  @IsPositive()
+  JWT_TOKEN_TTL: number;
 }
 
 /**

@@ -160,7 +160,7 @@
   database: configService.getOrThrow&lt;string&gt;(&quot;DATASOURCE_DATABASE&quot;),
   username: configService.getOrThrow&lt;string&gt;(&quot;DATASOURCE_USERNAME&quot;),
   password: configService.getOrThrow&lt;string&gt;(&quot;DATASOURCE_PASSWORD&quot;),
-  entities: [],
+  entities: [User, Todo],
   synchronize: true,
 })</code>
                     </td>
@@ -197,7 +197,10 @@
   database: configService.getOrThrow&lt;string&gt;(&quot;DB_NAME&quot;),
   username: configService.getOrThrow&lt;string&gt;(&quot;DB_USER&quot;),
   password: configService.getOrThrow&lt;string&gt;(&quot;DB_PASSWORD&quot;),
-  entities: [],
+  entities: [User, Todo],
+  ssl: {
+    rejectUnauthorized: false,
+  },
 })</code>
                     </td>
                 </tr>

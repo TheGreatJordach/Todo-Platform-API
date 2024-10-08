@@ -139,6 +139,14 @@
                                     <span class="modifier">Async</span>
                                 <a href="#createTransaction" >createTransaction</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#findUserByEmail" >findUserByEmail</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#findUserById" >findUserById</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -157,12 +165,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(transactionService: <a href="../injectables/TransactionsService.html" target="_self">TransactionsService</a>)</code>
+<code>constructor(sharedTransactions: <a href="../injectables/SharedTransactionsService.html" target="_self">SharedTransactionsService</a>, userTransactionService: <a href="../injectables/UserTransactionService.html" target="_self">UserTransactionService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/users/managment/user.service.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/users/managment/user.service.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -180,10 +188,22 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>transactionService</td>
+                                                        <td>sharedTransactions</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/TransactionsService.html" target="_self" >TransactionsService</a></code>
+                                                                        <code><a href="../injectables/SharedTransactionsService.html" target="_self" >SharedTransactionsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userTransactionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserTransactionService.html" target="_self" >UserTransactionService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -227,8 +247,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/users/managment/user.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="28"
+                                    class="link-to-prism">src/users/managment/user.service.ts:28</a></div>
                         </td>
                     </tr>
 
@@ -284,6 +304,164 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="findUserByEmail"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>findUserByEmail</b></span>
+                        <a href="#findUserByEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>findUserByEmail(email: <a href="../undefineds/Email.html" target="_self">Email</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/users/managment/user.service.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Asynchronously finds a user by their email address.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>email</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#Email" target="_self" >Email</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The email address of the user to search for.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../entitys/User.html" target="_self" >Promise&lt;User | null&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A Promise that resolves with the found User entity or null if not found.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="findUserById"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>findUserById</b></span>
+                        <a href="#findUserById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>findUserById(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/users/managment/user.service.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Asynchronously finds a user by their ID.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The ID of the user to search for.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../entitys/User.html" target="_self" >Promise&lt;User&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A Promise that resolves with the found User entity.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
     </div>
@@ -291,20 +469,22 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  ConflictException,
+  BadRequestException,
   Injectable,
   InternalServerErrorException,
-  Logger,
 } from &quot;@nestjs/common&quot;;
-import { DataSource } from &quot;typeorm&quot;;
 import { CreateUserDto } from &quot;../dto/create-user.dto&quot;;
 import { User } from &quot;../entity/user-entity&quot;;
-import { TransactionsService } from &quot;../../transactions/transactions.service&quot;;
+import { SharedTransactionsService } from &quot;../../transactions/shared-transactions.service&quot;;
+import { UserTransactionService } from &quot;../../transactions/user-transaction.service&quot;;
+import { Email } from &quot;../../common/types/email&quot;;
+import { validateEmail } from &quot;../../common/util/email.util&quot;;
 
 @Injectable()
 export class UserService {
   constructor(
-    private readonly transactionService: TransactionsService // Injecting DataSource for transactions
+    private readonly sharedTransactions: SharedTransactionsService,
+    private readonly userTransactionService: UserTransactionService
   ) {}
 
   /**
@@ -316,7 +496,38 @@ export class UserService {
    * @throws InternalServerErrorException if there is an issue creating the user.
    */
   async createTransaction(newUser: CreateUserDto): Promise&lt;User&gt; {
-    return this.transactionService.createEntity&lt;User&gt;(User, newUser);
+    return this.sharedTransactions.createEntity&lt;User&gt;(User, newUser);
+  }
+
+  /**
+   * Asynchronously finds a user by their ID.
+   *
+   * @param id - The ID of the user to search for.
+   * @returns A Promise that resolves with the found User entity.
+   */
+  async findUserById(id: number): Promise&lt;User&gt; {
+    return (await this.sharedTransactions.findOneEntityByID(User, id)) as User;
+  }
+
+  /**
+   * Asynchronously finds a user by their email address.
+   *
+   * @param email - The email address of the user to search for.
+   * @returns A Promise that resolves with the found User entity or null if not found.
+   * @throws BadRequestException if the email address format is invalid.
+   * @throws InternalServerErrorException if there is an issue during the search process.
+   */
+  async findUserByEmail(email: Email): Promise&lt;User | null&gt; {
+    try {
+      const validatedEmail: Email &#x3D; validateEmail(email);
+      return await this.userTransactionService.findOneUserByEmail(
+        User,
+        validatedEmail
+      );
+    } catch (error) {
+      if (error instanceof BadRequestException) throw error;
+      else throw new InternalServerErrorException(&#x60;Cause : ${error.stack}&#x60;);
+    }
   }
 }
 </code></pre>

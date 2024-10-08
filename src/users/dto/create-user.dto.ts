@@ -1,5 +1,6 @@
 import { BaseUserDto } from "./base-user.dto";
 import { IsStrongPassword } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
 /**
  * Class representing a data transfer object for creating a user.
@@ -7,6 +8,11 @@ import { IsStrongPassword } from "class-validator";
  * Contains a password field that must meet specific criteria.
  */
 export class CreateUserDto extends BaseUserDto {
+  @ApiProperty({
+    example: "PassWord@@201",
+    description:
+      "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character",
+  })
   @IsStrongPassword(
     {
       minLength: 8,

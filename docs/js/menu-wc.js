@@ -145,8 +145,8 @@ customElements.define(
                                 <li class="chapter inner">
                                     <div class="simple menu-toggler" data-bs-toggle="collapse" ${
                                       isNormalMode
-                                        ? 'data-bs-target="#injectables-links-module-TransactionsModule-bcf7157b6ed2278223d30961db0f4d1d0818b63a4574a9b2ae02e3228bc4fc19a21a23ccd4b7fd2424a287cecd295e189700928346f47ffa49cbffc6cc2d3893"'
-                                        : 'data-bs-target="#xs-injectables-links-module-TransactionsModule-bcf7157b6ed2278223d30961db0f4d1d0818b63a4574a9b2ae02e3228bc4fc19a21a23ccd4b7fd2424a287cecd295e189700928346f47ffa49cbffc6cc2d3893"'
+                                        ? 'data-bs-target="#injectables-links-module-TransactionsModule-e76af2d48458ae586ea6892db5c09ab3a80575fef13698c7af4eb2229eb13486236d6baddeb27d2d6b6ae6356d7e780378fee7f892123c7703cf94f4231e1e5e"'
+                                        : 'data-bs-target="#xs-injectables-links-module-TransactionsModule-e76af2d48458ae586ea6892db5c09ab3a80575fef13698c7af4eb2229eb13486236d6baddeb27d2d6b6ae6356d7e780378fee7f892123c7703cf94f4231e1e5e"'
                                     }>
                                         <span class="icon ion-md-arrow-round-down"></span>
                                         <span>Injectables</span>
@@ -154,11 +154,14 @@ customElements.define(
                                     </div>
                                     <ul class="links collapse" ${
                                       isNormalMode
-                                        ? 'id="injectables-links-module-TransactionsModule-bcf7157b6ed2278223d30961db0f4d1d0818b63a4574a9b2ae02e3228bc4fc19a21a23ccd4b7fd2424a287cecd295e189700928346f47ffa49cbffc6cc2d3893"'
-                                        : 'id="xs-injectables-links-module-TransactionsModule-bcf7157b6ed2278223d30961db0f4d1d0818b63a4574a9b2ae02e3228bc4fc19a21a23ccd4b7fd2424a287cecd295e189700928346f47ffa49cbffc6cc2d3893"'
+                                        ? 'id="injectables-links-module-TransactionsModule-e76af2d48458ae586ea6892db5c09ab3a80575fef13698c7af4eb2229eb13486236d6baddeb27d2d6b6ae6356d7e780378fee7f892123c7703cf94f4231e1e5e"'
+                                        : 'id="xs-injectables-links-module-TransactionsModule-e76af2d48458ae586ea6892db5c09ab3a80575fef13698c7af4eb2229eb13486236d6baddeb27d2d6b6ae6356d7e780378fee7f892123c7703cf94f4231e1e5e"'
                                     }>
                                         <li class="link">
-                                            <a href="injectables/TransactionsService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >TransactionsService</a>
+                                            <a href="injectables/SharedTransactionsService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >SharedTransactionsService</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/UserTransactionService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >UserTransactionService</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -247,6 +250,9 @@ customElements.define(
                                 <a href="classes/CreateUserDto.html" data-type="entity-link" >CreateUserDto</a>
                             </li>
                             <li class="link">
+                                <a href="classes/IdDto.html" data-type="entity-link" >IdDto</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/LoginUserDto.html" data-type="entity-link" >LoginUserDto</a>
                             </li>
                             <li class="link">
@@ -275,10 +281,16 @@ customElements.define(
                                     <a href="injectables/PasswordService.html" data-type="entity-link" >PasswordService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/TransactionsService.html" data-type="entity-link" >TransactionsService</a>
+                                    <a href="injectables/SharedTransactionsService.html" data-type="entity-link" >SharedTransactionsService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/TodoTransactionService.html" data-type="entity-link" >TodoTransactionService</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/UserService.html" data-type="entity-link" >UserService</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/UserTransactionService.html" data-type="entity-link" >UserTransactionService</a>
                                 </li>
                             </ul>
                         </li>
@@ -311,6 +323,9 @@ customElements.define(
                         <ul class="links collapse " ${isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"'}>
                             <li class="link">
                                 <a href="miscellaneous/functions.html" data-type="entity-link">Functions</a>
+                            </li>
+                            <li class="link">
+                                <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>
                             </li>
                             <li class="link">
                                 <a href="miscellaneous/variables.html" data-type="entity-link">Variables</a>

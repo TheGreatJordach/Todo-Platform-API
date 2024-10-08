@@ -9,16 +9,17 @@ import {
 } from "typeorm";
 import { Todo } from "../../todo/entity/todo-entity";
 import { Logger } from "@nestjs/common";
+import { Email } from "../../common/types/email";
 
 @Entity("users")
 export class User {
-  private readonly logger = new Logger("User Table");
+  private readonly logger? = new Logger("User Table");
   @PrimaryGeneratedColumn()
-  userId: number;
+  id: number;
   @Column()
   name: string;
   @Column({ unique: true })
-  email: string;
+  email: Email;
   @Column()
   password: string;
   @OneToMany(() => Todo, (todo) => todo.user, { onDelete: "CASCADE" })
@@ -35,6 +36,6 @@ export class User {
   }
   @AfterRemove()
   afterRemove() {
-    this.logger.log(`Successfully Removed 📢 User with ID: ${this.userId}`);
+    this.logger.log(`Successfully Removed 📢 User with ID: ${this.id}`);
   }
 }

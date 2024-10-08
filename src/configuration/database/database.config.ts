@@ -1,6 +1,8 @@
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { InternalServerErrorException, Logger } from "@nestjs/common";
+import { User } from "../../users/entity/user-entity";
+import { Todo } from "../../todo/entity/todo-entity";
 
 /**
  * Returns the TypeORM module options for connecting to a PostgreSQL database running in a Docker container.
@@ -17,7 +19,7 @@ export const getDockerDbConfig = (
   database: configService.getOrThrow<string>("DATASOURCE_DATABASE"),
   username: configService.getOrThrow<string>("DATASOURCE_USERNAME"),
   password: configService.getOrThrow<string>("DATASOURCE_PASSWORD"),
-  entities: [],
+  entities: [User, Todo],
   synchronize: true,
 });
 
@@ -57,7 +59,10 @@ export const getRDSConfig = (
   database: configService.getOrThrow<string>("DB_NAME"),
   username: configService.getOrThrow<string>("DB_USER"),
   password: configService.getOrThrow<string>("DB_PASSWORD"),
-  entities: [],
+  entities: [User, Todo],
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 /**

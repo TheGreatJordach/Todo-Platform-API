@@ -1,13 +1,16 @@
 import {
   ConflictException,
   Injectable,
-  InternalServerErrorException,
   Logger,
+  NotFoundException,
 } from "@nestjs/common";
 import { DataSource, DeepPartial, EntityTarget } from "typeorm";
 
+import { Todo } from "../todo/entity/todo-entity";
+import { User } from "../users/entity/user-entity";
+
 @Injectable()
-export class TransactionsService {
+export class SharedTransactionsService {
   private readonly logger = new Logger("TransactionService");
 
   constructor(private readonly dataSource: DataSource) {}
@@ -49,17 +52,38 @@ export class TransactionsService {
               `Conflict creating new record - Transaction Failed due to: ${error.detail}`
             );
             throw new ConflictException(
-              `A conflict occurred - Transaction Failed.`
+              "A conflict occurred - email already exists."
             );
           }
+          throw error;
+        }
+      }
+    );
+  }
 
-          // Log and throw an internal server error for any other issues
-          this.logger.error(
-            `Failed to create new entity due to: ${error.message}`
-          );
-          throw new InternalServerErrorException(
-            `Failed to create new entity.`
-          );
+  /**
+   * Asynchronously finds an entity by its ID within a transaction.
+   *
+   * @param entityClass The class of the entity to search for (Todo or User).
+   * @param id The ID of the entity to find.
+   * @returns A Promise that resolves with the found entity.
+   * @throws NotFoundException if the entity with the provided ID is not found.
+   */
+  async findOneEntityByID(entityClass: EntityTarget<Todo | User>, id: number) {
+    return await this.dataSource.transaction<Todo | User>(
+      async (transactionalEntityManager) => {
+        try {
+          return await transactionalEntityManager.findOneBy(entityClass, {
+            id: id,
+          });
+        } catch (error) {
+          if (entityClass === Todo) {
+            this.logger.log(`No Todo with id:${id} found`);
+          } else if (entityClass === User) {
+            this.logger.log(`No User with id:${id} found`);
+          }
+          const message = `${entityClass === Todo ? "Todo" : "User"} with id: ${id} not found`;
+          throw new NotFoundException(message);
         }
       }
     );

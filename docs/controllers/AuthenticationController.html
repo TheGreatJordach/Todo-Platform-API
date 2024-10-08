@@ -121,17 +121,162 @@
 
 
 
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
 
-    </div>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Async</span>
+                                <a href="#register" >register</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="register"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Async</span>
+                        <span ><b>register</b></span>
+                        <a href="#register"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>register(createUserDto: <a href="../classes/CreateUserDto.html" target="_self">CreateUserDto</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@ApiOperation({summary: &#x27;create new user&#x27;})<br />@ApiResponse({status: 200, description: &#x27;User created successfully.&#x27;})<br />@ApiBody({type: CreateUserDto})<br />@Post()<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="22"
+                                    class="link-to-prism">src/iam/authentication/authentication.controller.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Registers a new user by calling the registration method in the AuthenticationService.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>createUserDto</td>
+                                            <td>
+                                                            <code><a href="../classes/CreateUserDto.html" target="_self" >CreateUserDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The data transfer object containing the user&#39;s registration information.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../entitys/User.html" target="_self" >Promise&lt;User&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The newly created user after successful registration.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Controller } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Post } from &quot;@nestjs/common&quot;;
 import { AuthenticationService } from &quot;./authentication.service&quot;;
+import { CreateUserDto } from &quot;../../users/dto/create-user.dto&quot;;
+import { ApiBody, ApiOperation, ApiResponse, ApiTags } from &quot;@nestjs/swagger&quot;;
+import { User } from &quot;../../users/entity/user-entity&quot;;
 
+@ApiTags(&quot;Registration&quot;)
 @Controller()
 export class AuthenticationController {
   constructor(private readonly authenticationService: AuthenticationService) {}
+
+  /**
+   * Registers a new user by calling the registration method in the AuthenticationService.
+   *
+   * @param {CreateUserDto} createUserDto - The data transfer object containing the user&#x27;s registration information.
+   * @returns {Promise&lt;User&gt;} The newly created user after successful registration.
+   */
+  @ApiOperation({ summary: &quot;create new user&quot; })
+  @ApiResponse({ status: 200, description: &quot;User created successfully.&quot; })
+  @ApiBody({ type: CreateUserDto })
+  @Post()
+  async register(@Body() createUserDto: CreateUserDto): Promise&lt;User&gt; {
+    return await this.authenticationService.registration(createUserDto);
+  }
 }
 </code></pre>
     </div>

@@ -156,10 +156,12 @@ Contains a password field that must meet specific criteria.</p>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#password" >password</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                 <a href="#email" >email</a>
@@ -167,9 +169,11 @@ Contains a password field that must meet specific criteria.</p>
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#name" >name</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                 <a href="#todos" >todos</a>
@@ -200,6 +204,7 @@ Contains a password field that must meet specific criteria.</p>
                     <a name="password"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                             <span class="modifier">Readonly</span>
                         <span ><b>password</b></span>
                         <a href="#password"><span class="icon ion-ios-link"></span></a>
@@ -217,13 +222,13 @@ Contains a password field that must meet specific criteria.</p>
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsStrongPassword({minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1}, {message: &#x27;Password must be at least 8 characters long and include uppercase, lowercase, number, and special character. Example: PassWord@@201&#x27;})<br />
+                            @ApiProperty({example: &#x27;PassWord@@201&#x27;, description: &#x27;Password must be at least 8 characters long and include uppercase, lowercase, number, and special character&#x27;})<br />@IsStrongPassword({minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1}, {message: &#x27;Password must be at least 8 characters long and include uppercase, lowercase, number, and special character. Example: PassWord@@201&#x27;})<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/users/dto/create-user.dto.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/users/dto/create-user.dto.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -238,8 +243,54 @@ Contains a password field that must meet specific criteria.</p>
                     <span class="name">
                             <span class="modifier"></span>
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>email</b></span>
                         <a href="#email"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#Email" target="_self" >Email</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @ApiProperty({example: &#x27;John@example.com&#x27;})<br />@IsNotEmpty()<br />@IsEmail()<br />
+                        </code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/BaseUserDto.html" target="_self" >BaseUserDto</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/BaseUserDto.html#source" target="_self" >BaseUserDto:15</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="name"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                        <span ><b>name</b></span>
+                        <a href="#name"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -254,7 +305,7 @@ Contains a password field that must meet specific criteria.</p>
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @IsNotEmpty()<br />@IsString()<br />
+                            @ApiProperty({example: &#x27;John Doe&#x27;})<br />@IsNotEmpty()<br />@IsString()<br />
                         </code>
                     </td>
                 </tr>
@@ -278,52 +329,9 @@ Contains a password field that must meet specific criteria.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="name"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier"></span>
-                        <span ><b>name</b></span>
-                        <a href="#name"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <b>Decorators : </b>
-                        <br />
-                        <code>
-                            @IsNotEmpty()<br />@IsString()<br />
-                        </code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Inherited from         <code><a href="../classes/BaseUserDto.html" target="_self" >BaseUserDto</a></code>
-</div>
-                            </td>
-                        </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in         <code><a href="../classes/BaseUserDto.html#source" target="_self" >BaseUserDto:8</a></code>
-</div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="todos"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                         <span ><b>todos</b></span>
@@ -342,7 +350,7 @@ Contains a password field that must meet specific criteria.</p>
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @Type(undefined)<br />@ValidateNested({each: true})<br />
+                            @ApiProperty({type: undefined, description: &#x27;List of todos associated with the user&#x27;, example: undefined})<br />@Type(undefined)<br />@ValidateNested({each: true})<br />
                         </code>
                     </td>
                 </tr>
@@ -354,7 +362,7 @@ Contains a password field that must meet specific criteria.</p>
                         </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in         <code><a href="../classes/BaseUserDto.html#source" target="_self" >BaseUserDto:15</a></code>
+                                <div class="io-line">Defined in         <code><a href="../classes/BaseUserDto.html#source" target="_self" >BaseUserDto:26</a></code>
 </div>
                         </td>
                     </tr>
@@ -376,6 +384,7 @@ Contains a password field that must meet specific criteria.</p>
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { BaseUserDto } from &quot;./base-user.dto&quot;;
 import { IsStrongPassword } from &quot;class-validator&quot;;
+import { ApiProperty } from &quot;@nestjs/swagger&quot;;
 
 /**
  * Class representing a data transfer object for creating a user.
@@ -383,6 +392,11 @@ import { IsStrongPassword } from &quot;class-validator&quot;;
  * Contains a password field that must meet specific criteria.
  */
 export class CreateUserDto extends BaseUserDto {
+  @ApiProperty({
+    example: &quot;PassWord@@201&quot;,
+    description:
+      &quot;Password must be at least 8 characters long and include uppercase, lowercase, number, and special character&quot;,
+  })
   @IsStrongPassword(
     {
       minLength: 8,
