@@ -1,16 +1,22 @@
-import { ConflictException, Injectable, Logger } from "@nestjs/common";
+import { ConflictException, Inject, Injectable, Logger } from "@nestjs/common";
 import { CreateUserDto } from "../../users/dto/create-user.dto";
 
 import { UserService } from "../../users/managment/user.service";
 import { User } from "../../users/entity/user-entity";
 import { PasswordService } from "../password/password.service";
+import { JwtService } from "@nestjs/jwt";
+import { ConfigType } from "@nestjs/config";
+import jwtConfig from "../jwt/jwt.config";
 
 @Injectable()
 export class AuthenticationService {
   private readonly logger = new Logger("AuthenticationService");
   constructor(
     private readonly userService: UserService,
-    private readonly passwordService: PasswordService
+    private readonly passwordService: PasswordService,
+    private readonly jwtService: JwtService,
+    @Inject(jwtConfig.KEY)
+    private readonly jwtConfiguration: ConfigType<typeof jwtConfig>
   ) {}
 
   /**
@@ -51,7 +57,7 @@ export class AuthenticationService {
    *
    * @returns {Promise<User>} The newly created user after successful registration.
    */
-  async registration(newUser: CreateUserDto): Promise<User> {
+  async registration(newUser: CreateUserDto): Promise<{ token: string }> {
     // Ovoid Conflict
     const userAlreadyExist: User = await this.userService.findUserByEmail(
       newUser.email
@@ -65,11 +71,12 @@ export class AuthenticationService {
       const hashedPassword = await this.passwordService.hashPassword(
         newUser.password
       );
-      return await this.userService.createTransaction({
+      const storedUser: User = await this.userService.createTransaction({
         ...newUser,
         password: hashedPassword,
       });
 
+      return await this.signToken(storedUser);
       //next: Generate token
       // return Token
       // store user to meilisearch
@@ -78,5 +85,24 @@ export class AuthenticationService {
       this.logger.error(`Details : ${error.stack}`);
       throw error;
     }
+  }
+
+  private async signToken(user: User) {
+    const token = await this.jwtService.signAsync(
+      {
+        sub: user.id,
+        email: user.email,
+      },
+      {
+        audience: this.jwtConfiguration.audience,
+        issuer: this.jwtConfiguration.issuer,
+        secret: this.jwtConfiguration.secret,
+        expiresIn: this.jwtConfiguration.accessTokenTtl,
+      }
+    );
+
+    return {
+      token: token,
+    };
   }
 }

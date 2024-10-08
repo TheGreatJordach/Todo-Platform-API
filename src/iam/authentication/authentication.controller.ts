@@ -2,8 +2,11 @@ import { Body, Controller, Post } from "@nestjs/common";
 import { AuthenticationService } from "./authentication.service";
 import { CreateUserDto } from "../../users/dto/create-user.dto";
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { User } from "../../users/entity/user-entity";
 
+import { Serialize } from "../../common/interceptor/custom-serializer.interceptor";
+import { PublicUserDTO } from "../../users/dto/public-user.dto";
+
+@Serialize(PublicUserDTO)
 @ApiTags("Registration")
 @Controller()
 export class AuthenticationController {
@@ -13,13 +16,15 @@ export class AuthenticationController {
    * Registers a new user by calling the registration method in the AuthenticationService.
    *
    * @param {CreateUserDto} createUserDto - The data transfer object containing the user's registration information.
-   * @returns {Promise<User>} The newly created user after successful registration.
+   * @returns { Promise<{ token: string }>} The access Token.
    */
   @ApiOperation({ summary: "create new user" })
   @ApiResponse({ status: 200, description: "User created successfully." })
   @ApiBody({ type: CreateUserDto })
-  @Post()
-  async register(@Body() createUserDto: CreateUserDto): Promise<User> {
+  @Post("register")
+  async register(
+    @Body() createUserDto: CreateUserDto
+  ): Promise<{ token: string }> {
     return await this.authenticationService.registration(createUserDto);
   }
 }

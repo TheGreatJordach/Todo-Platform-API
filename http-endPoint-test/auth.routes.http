@@ -1,5 +1,5 @@
 ### MUST FAIL REGISTRATION
-POST http://localhost:3000/api/retister
+POST http://localhost:3001/register
 Content-Type: application/json
 
 {
@@ -8,11 +8,11 @@ Content-Type: application/json
 }
 
 ### REGISTRATION
-POST http://localhost:3000/api/retister
+POST http://localhost:3001/register
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "john@doe.com",
-  "password": "password"
+  "name": "Samira ines",
+  "email": "ines@doe.com",
+  "password": "Password@@2026"
 }

@@ -79,7 +79,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content miscellaneous-functions">
+               <div class="content miscellaneous-typealiases">
                    <div class="content-data">
 
 
@@ -101,7 +101,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Miscellaneous</li>
-  <li class="breadcrumb-item">Functions</li>
+  <li class="breadcrumb-item">Type aliases</li>
 </ol>
 
 <section data-compodoc="block-index">
@@ -112,13 +112,7 @@
                 <td class="col-md-4">
                     <ul class="index-list">
                         <li>
-                            <a href="#bootstrap" title="src/main.ts" ><b>bootstrap</b>&nbsp;&nbsp;&nbsp;(src/.../main.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#ValidatedEnv" title="src/configuration/env/validate-environment.ts" ><b>ValidatedEnv</b>&nbsp;&nbsp;&nbsp;(src/.../validate-environment.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#validateEmail" title="src/common/util/email.util.ts" ><b>validateEmail</b>&nbsp;&nbsp;&nbsp;(src/.../email.util.ts)</a>
+                            <a href="#Email" title="src/common/types/email.ts" ><b>Email</b>&nbsp;&nbsp;&nbsp;(src/.../email.ts)</a>
                         </li>
                     </ul>
                 </td>
@@ -127,164 +121,20 @@
     </table>
 </section>
 
-    <h3>src/main.ts</h3>
-    <section data-compodoc="block-methods">
-    <h3></h3>    <table class="table table-sm table-bordered">
+    <h3>src/common/types/email.ts</h3>
+    <section data-compodoc="block-typealias">
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="bootstrap"></a>
-                    <span class="name">
-                        <span ><b>bootstrap</b></span>
-                        <a href="#bootstrap"><span class="icon ion-ios-link"></span></a>
-                    </span>
+                    <a name="Email"></a>
+                    <span class="name "><b>Email</b><a href="#Email"><span class="icon ion-ios-link"></span></a></span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>bootstrap()</code>
-                </td>
-            </tr>
-
-
-
-
-        </tbody>
-    </table>
-</section>    <h3>src/configuration/env/validate-environment.ts</h3>
-    <section data-compodoc="block-methods">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ValidatedEnv"></a>
-                    <span class="name">
-                        <span ><b>ValidatedEnv</b></span>
-                        <a href="#ValidatedEnv"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ValidatedEnv(config: Record)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Validates the provided configuration object based on the ValidateEnvironment class rules.
-Logs any validation errors and throws an InternalServerErrorException if errors are found.
-Returns the validated configuration object.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>config</td>
-                                            <td>
-                                                        <code>Record</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>The configuration object to be validated.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>    <h3>src/common/util/email.util.ts</h3>
-    <section data-compodoc="block-methods">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="validateEmail"></a>
-                    <span class="name">
-                        <span ><b>validateEmail</b></span>
-                        <a href="#validateEmail"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>validateEmail(email: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Validates the format of an email address.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>email</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <p>The email address to validate.</p>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../miscellaneous/typealiases.html#Email" target="_self" >Email</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>The validated email address with the &#39;brand&#39; symbol.</p>
-
-                            </div>
+                    <code>    <code></code>
+</code>
                 </td>
             </tr>
         </tbody>
@@ -317,8 +167,8 @@ Returns the validated configuration object.</p>
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-functions';
-            var COMPODOC_CURRENT_PAGE_URL = 'functions.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-typealiases';
+            var COMPODOC_CURRENT_PAGE_URL = 'typealiases.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

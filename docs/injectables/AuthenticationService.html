@@ -122,18 +122,348 @@
 
 
 
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#logger" >logger</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#registration" >registration</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, passwordService: <a href="../injectables/PasswordService.html" target="_self">PasswordService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/iam/authentication/authentication.service.ts:10</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>passwordService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/PasswordService.html" target="_self" >PasswordService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="registration"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>registration</b></span>
+                        <a href="#registration"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>registration(newUser: <a href="../classes/CreateUserDto.html" target="_self">CreateUserDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/iam/authentication/authentication.service.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Registers a new user in the system.</p>
+<p>This method handles the user registration process, including checking for
+existing users to avoid conflicts, hashing the user&#39;s password, creating a
+new user in the database, and handling any potential errors during the process.</p>
+<h3>Workflow:</h3>
+<ol>
+<li><strong>Conflict Check</strong>: Verifies if a user with the provided email already exists
+by calling <code>this.userService.findUserByEmail</code>. If a user is found, a <code>ConflictException</code>
+is thrown.</li>
+<li><strong>Password Hashing</strong>: Uses <code>this.passwordService.hashPassword</code> to hash the user&#39;s password
+securely before storing it in the database.</li>
+<li><strong>User Creation</strong>: Once the password is hashed, the user is created through the
+<code>this.userService.createTransaction</code> method. The new user data is passed along with the
+hashed password.</li>
+</ol>
+<h3>Possible Enhancements (Commented-out code):</h3>
+<ul>
+<li><strong>Token Generation</strong>: A token can be generated and returned for immediate use upon successful
+registration.</li>
+<li><strong>MeiliSearch Integration</strong>: The user data can be indexed in MeiliSearch for search optimization.</li>
+</ul>
+<h3>Error Handling:</h3>
+<ul>
+<li>In the case of any database constraint violations or other unexpected errors, the method
+logs the details of the error using <code>this.logger.error</code>.</li>
+<li>Any exceptions from the underlying services (<code>userService</code>, <code>passwordService</code>) are propagated
+up and handled elsewhere in the application, ensuring that there is no redundant error handling
+layer in this method.</li>
+</ul>
+<p>(name, email, password, etc.).</p>
+<p>is logged and propagated.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newUser</td>
+                                            <td>
+                                                            <code><a href="../classes/CreateUserDto.html" target="_self" >CreateUserDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The data transfer object containing the user&#39;s registration information
+(name, email, password, etc.).</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../entitys/User.html" target="_self" >Promise&lt;User&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>The newly created user after successful registration.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logger"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>logger</b></span>
+                        <a href="#logger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Logger(&quot;AuthenticationService&quot;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/iam/authentication/authentication.service.ts:10</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &quot;@nestjs/common&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ConflictException, Injectable, Logger } from &quot;@nestjs/common&quot;;
+import { CreateUserDto } from &quot;../../users/dto/create-user.dto&quot;;
+
+import { UserService } from &quot;../../users/managment/user.service&quot;;
+import { User } from &quot;../../users/entity/user-entity&quot;;
+import { PasswordService } from &quot;../password/password.service&quot;;
 
 @Injectable()
-export class AuthenticationService {}
+export class AuthenticationService {
+  private readonly logger &#x3D; new Logger(&quot;AuthenticationService&quot;);
+  constructor(
+    private readonly userService: UserService,
+    private readonly passwordService: PasswordService
+  ) {}
+
+  /**
+   * Registers a new user in the system.
+   *
+   * This method handles the user registration process, including checking for
+   * existing users to avoid conflicts, hashing the user&#x27;s password, creating a
+   * new user in the database, and handling any potential errors during the process.
+   *
+   * ### Workflow:
+   * 1. **Conflict Check**: Verifies if a user with the provided email already exists
+   *    by calling &#x60;this.userService.findUserByEmail&#x60;. If a user is found, a &#x60;ConflictException&#x60;
+   *    is thrown.
+   * 2. **Password Hashing**: Uses &#x60;this.passwordService.hashPassword&#x60; to hash the user&#x27;s password
+   *    securely before storing it in the database.
+   * 3. **User Creation**: Once the password is hashed, the user is created through the
+   *    &#x60;this.userService.createTransaction&#x60; method. The new user data is passed along with the
+   *    hashed password.
+   *
+   * ### Possible Enhancements (Commented-out code):
+   * - **Token Generation**: A token can be generated and returned for immediate use upon successful
+   *   registration.
+   * - **MeiliSearch Integration**: The user data can be indexed in MeiliSearch for search optimization.
+   *
+   * ### Error Handling:
+   * - In the case of any database constraint violations or other unexpected errors, the method
+   *   logs the details of the error using &#x60;this.logger.error&#x60;.
+   * - Any exceptions from the underlying services (&#x60;userService&#x60;, &#x60;passwordService&#x60;) are propagated
+   *   up and handled elsewhere in the application, ensuring that there is no redundant error handling
+   *   layer in this method.
+   *
+   * @param {CreateUserDto} newUser - The data transfer object containing the user&#x27;s registration information
+   * (name, email, password, etc.).
+   *
+   * @throws {ConflictException} If a user with the same email already exists.
+   * @throws {Error} Any error thrown from the underlying services, such as database or hashing errors,
+   * is logged and propagated.
+   *
+   * @returns {Promise&lt;User&gt;} The newly created user after successful registration.
+   */
+  async registration(newUser: CreateUserDto): Promise&lt;User&gt; {
+    // Ovoid Conflict
+    const userAlreadyExist: User &#x3D; await this.userService.findUserByEmail(
+      newUser.email
+    );
+    if (userAlreadyExist) {
+      throw new ConflictException(&quot;User already exists&quot;);
+    }
+
+    try {
+      // Hash Password
+      const hashedPassword &#x3D; await this.passwordService.hashPassword(
+        newUser.password
+      );
+      return await this.userService.createTransaction({
+        ...newUser,
+        password: hashedPassword,
+      });
+
+      //next: Generate token
+      // return Token
+      // store user to meilisearch
+    } catch (error) {
+      this.logger.error(&#x60;Failed to create new user. Cause : ${error.detail}&#x60;);
+      this.logger.error(&#x60;Details : ${error.stack}&#x60;);
+      throw error;
+    }
+  }
+}
 </code></pre>
     </div>
 
