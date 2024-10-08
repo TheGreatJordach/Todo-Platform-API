@@ -1,4 +1,11 @@
-import { ConflictException, Inject, Injectable, Logger } from "@nestjs/common";
+import {
+  Body,
+  ConflictException,
+  Inject,
+  Injectable,
+  Logger,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { CreateUserDto } from "../../users/dto/create-user.dto";
 
 import { UserService } from "../../users/managment/user.service";
@@ -7,6 +14,8 @@ import { PasswordService } from "../password/password.service";
 import { JwtService } from "@nestjs/jwt";
 import { ConfigType } from "@nestjs/config";
 import jwtConfig from "../jwt/jwt.config";
+import { ActiveUserData } from "../interface/active-user-data.interface";
+import { RefreshTokenDto } from "../dto/refresh-token.dto";
 
 @Injectable()
 export class AuthenticationService {
@@ -55,9 +64,11 @@ export class AuthenticationService {
    * @throws {Error} Any error thrown from the underlying services, such as database or hashing errors,
    * is logged and propagated.
    *
-   * @returns {Promise<User>} The newly created user after successful registration.
+   * @returns {: Promise<{ token: string }>} Access token.
    */
-  async registration(newUser: CreateUserDto): Promise<{ token: string }> {
+  async registration(
+    newUser: CreateUserDto
+  ): Promise<{ token: string; refreshToken: string }> {
     // Ovoid Conflict
     const userAlreadyExist: User = await this.userService.findUserByEmail(
       newUser.email
@@ -76,7 +87,7 @@ export class AuthenticationService {
         password: hashedPassword,
       });
 
-      return await this.signToken(storedUser);
+      return await this.generateToken(storedUser);
       //next: Generate token
       // return Token
       // store user to meilisearch
@@ -87,22 +98,53 @@ export class AuthenticationService {
     }
   }
 
-  private async signToken(user: User) {
-    const token = await this.jwtService.signAsync(
+  private async signToken<T>(
+    userID: number,
+    expiresIn: number,
+    payload?: T
+  ): Promise<string> {
+    return await this.jwtService.signAsync(
       {
-        sub: user.id,
-        email: user.email,
+        sub: userID,
+        ...payload,
       },
       {
         audience: this.jwtConfiguration.audience,
         issuer: this.jwtConfiguration.issuer,
         secret: this.jwtConfiguration.secret,
-        expiresIn: this.jwtConfiguration.accessTokenTtl,
+        expiresIn: expiresIn,
       }
     );
+  }
 
+  async refreshTokens(@Body() refreshTokenDto: RefreshTokenDto) {
+    try {
+      const { sub } = await this.jwtService.verifyAsync<
+        Pick<ActiveUserData, "sub">
+      >(refreshTokenDto.refreshToken, {
+        secret: this.jwtConfiguration.secret,
+        audience: this.jwtConfiguration.audience,
+        issuer: this.jwtConfiguration.issuer,
+      });
+      const user: User = await this.userService.findUserById(sub);
+      return this.generateToken(user);
+    } catch (error) {
+      throw new UnauthorizedException();
+    }
+  }
+
+  async generateToken(user: User) {
+    const [accessToken, refreshToken] = await Promise.all([
+      this.signToken<Partial<ActiveUserData>>(
+        user.id,
+        this.jwtConfiguration.accessTokenTtl,
+        { email: user.email }
+      ),
+      this.signToken(user.id, this.jwtConfiguration.accessTokenTtl),
+    ]);
     return {
-      token: token,
+      token: accessToken,
+      refreshToken: refreshToken,
     };
   }
 }

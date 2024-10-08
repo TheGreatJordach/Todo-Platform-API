@@ -1,12 +1,9 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, HttpCode, HttpStatus, Post } from "@nestjs/common";
 import { AuthenticationService } from "./authentication.service";
 import { CreateUserDto } from "../../users/dto/create-user.dto";
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { RefreshTokenDto } from "../dto/refresh-token.dto";
 
-import { Serialize } from "../../common/interceptor/custom-serializer.interceptor";
-import { PublicUserDTO } from "../../users/dto/public-user.dto";
-
-@Serialize(PublicUserDTO)
 @ApiTags("Registration")
 @Controller()
 export class AuthenticationController {
@@ -24,7 +21,16 @@ export class AuthenticationController {
   @Post("register")
   async register(
     @Body() createUserDto: CreateUserDto
-  ): Promise<{ token: string }> {
+  ): Promise<{ token: string; refreshToken: string }> {
     return await this.authenticationService.registration(createUserDto);
+  }
+
+  @ApiOperation({ summary: "Refresh the token " })
+  @ApiResponse({ status: 200, description: "Token successfully refresh." })
+  @ApiBody({ type: RefreshTokenDto })
+  @HttpCode(HttpStatus.OK)
+  @Post("refresh-token")
+  async refreshTokens(@Body() refreshToken: RefreshTokenDto) {
+    return await this.authenticationService.refreshTokens(refreshToken);
   }
 }

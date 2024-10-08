@@ -12,7 +12,16 @@ POST http://localhost:3001/register
 Content-Type: application/json
 
 {
-  "name": "Samira ines",
-  "email": "ines@doe.com",
+  "name": "Brice Darnel",
+  "email": "lewis8@doe.com",
   "password": "Password@@2026"
+}
+
+### REGISTRATION
+POST http://localhost:3001/refresh-token
+Content-Type: application/json
+
+
+{
+ "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI2LCJpYXQiOjE3Mjg0MzEwNzIsImV4cCI6MTcyODQzNDY3MiwiYXVkIjoiaHR0cDovL2xvY2FsaG9zdDozMDAxIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDozMDAxIn0.11a7h3R01VTil8W_W426oGOT-iYIY4gQ6_c6y7a1Usg"
 }
