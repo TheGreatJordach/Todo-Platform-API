@@ -16,7 +16,7 @@ import { User } from "../../users/entity/user-entity";
 export class Todo {
   private readonly logger = new Logger(Todo.name);
   @PrimaryGeneratedColumn()
-  todoId: number;
+  id: number;
   @Column()
   title: string;
   @Column()
@@ -30,14 +30,14 @@ export class Todo {
 
   @AfterInsert()
   afterInsert() {
-    this.logger.log(`New todo Inserted : ID :${this.todoId}`);
+    this.logger.log(`New todo Inserted : ID :${this.id}`);
   }
   @AfterUpdate()
   afterUpdate() {
-    this.logger.log(`Updated todo : ID :${this.todoId}`);
+    this.logger.log(`Updated todo : ID :${this.id}`);
   }
   @AfterRemove()
   afterRemove() {
-    this.logger.log(`todo : ID :${this.todoId} successfully removed`);
+    this.logger.log(`todo : ID :${this.id} successfully removed`);
   }
 }

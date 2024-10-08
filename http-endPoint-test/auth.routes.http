@@ -1,0 +1,18 @@
+### MUST FAIL REGISTRATION
+POST http://localhost:3000/api/retister
+Content-Type: application/json
+
+{
+  "id": 999,
+  "value": "content"
+}
+
+### REGISTRATION
+POST http://localhost:3000/api/retister
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@doe.com",
+  "password": "password"
+}

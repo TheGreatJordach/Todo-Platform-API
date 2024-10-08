@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >TransactionsService</li>
+  <li class="breadcrumb-item" >SharedTransactionsService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/transactions/transactions.service.ts</code>
+            <code>src/transactions/shared-transactions.service.ts</code>
         </p>
 
 
@@ -178,7 +178,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/transactions/transactions.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/transactions/shared-transactions.service.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -244,7 +244,7 @@
                     <tr>
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/transactions/transactions.service.ts:30</a></div>
+                                    class="link-to-prism">src/transactions/shared-transactions.service.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -343,7 +343,7 @@ Output: User entity with the provided details</code></pre></div></div>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/transactions/transactions.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/transactions/shared-transactions.service.ts:11</a></div>
                         </td>
                     </tr>
 
@@ -365,7 +365,7 @@ Output: User entity with the provided details</code></pre></div></div>
 import { DataSource, DeepPartial, EntityTarget } from &quot;typeorm&quot;;
 
 @Injectable()
-export class TransactionsService {
+export class SharedTransactionsService {
   private readonly logger &#x3D; new Logger(&quot;TransactionService&quot;);
 
   constructor(private readonly dataSource: DataSource) {}

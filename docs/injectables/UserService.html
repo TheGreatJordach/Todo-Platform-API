@@ -157,7 +157,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(transactionService: <a href="../injectables/TransactionsService.html" target="_self">TransactionsService</a>)</code>
+<code>constructor(transactionService: <a href="../injectables/TransactionsService.html" target="_self">SharedTransactionsService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -183,7 +183,7 @@
                                                         <td>transactionService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/TransactionsService.html" target="_self" >TransactionsService</a></code>
+                                                                        <code><a href="../injectables/TransactionsService.html" target="_self" >SharedTransactionsService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -299,12 +299,12 @@
 import { DataSource } from &quot;typeorm&quot;;
 import { CreateUserDto } from &quot;../dto/create-user.dto&quot;;
 import { User } from &quot;../entity/user-entity&quot;;
-import { TransactionsService } from &quot;../../transactions/transactions.service&quot;;
+import { SharedTransactionsService } from &quot;../../transactions/transactions.service&quot;;
 
 @Injectable()
 export class UserService {
   constructor(
-    private readonly transactionService: TransactionsService // Injecting DataSource for transactions
+    private readonly transactionService: SharedTransactionsService // Injecting DataSource for transactions
   ) {}
 
   /**

@@ -12,7 +12,7 @@ export class BasePublicUserDto {
   @Expose()
   @IsPositive()
   @IsInt()
-  readonly userId: number;
+  readonly id: number;
   @Expose()
   @IsString()
   @IsNotEmpty()
