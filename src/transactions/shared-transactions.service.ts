@@ -61,6 +61,14 @@ export class SharedTransactionsService {
     );
   }
 
+  /**
+   * Asynchronously finds an entity by its ID within a transaction.
+   *
+   * @param entityClass The class of the entity to search for (Todo or User).
+   * @param id The ID of the entity to find.
+   * @returns A Promise that resolves with the found entity.
+   * @throws NotFoundException if the entity with the provided ID is not found.
+   */
   async findOneEntityByID(entityClass: EntityTarget<Todo | User>, id: number) {
     return await this.dataSource.transaction<Todo | User>(
       async (transactionalEntityManager) => {

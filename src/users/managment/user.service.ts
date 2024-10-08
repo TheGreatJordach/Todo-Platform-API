@@ -29,10 +29,24 @@ export class UserService {
     return this.sharedTransactions.createEntity<User>(User, newUser);
   }
 
+  /**
+   * Asynchronously finds a user by their ID.
+   *
+   * @param id - The ID of the user to search for.
+   * @returns A Promise that resolves with the found User entity.
+   */
   async findUserById(id: number): Promise<User> {
     return (await this.sharedTransactions.findOneEntityByID(User, id)) as User;
   }
 
+  /**
+   * Asynchronously finds a user by their email address.
+   *
+   * @param email - The email address of the user to search for.
+   * @returns A Promise that resolves with the found User entity or null if not found.
+   * @throws BadRequestException if the email address format is invalid.
+   * @throws InternalServerErrorException if there is an issue during the search process.
+   */
   async findUserByEmail(email: Email): Promise<User | null> {
     try {
       const validatedEmail: Email = validateEmail(email);
