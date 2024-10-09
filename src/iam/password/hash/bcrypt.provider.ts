@@ -18,7 +18,7 @@ export class BcryptProvider implements HashAlgorithmInterface {
    * @saltRound : Is part of the Global strategy for env validation,
    * An exception will be thrown, and app will stop if not provided
    * */
-  private readonly saltRound = parseInt(process.env.SALT_ROUND);
+  private readonly saltRound = parseInt(process.env.SALT_ROUND || "12");
 
   /**
    * Compares the provided data with an encrypted hash using bcrypt.

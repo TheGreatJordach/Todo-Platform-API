@@ -22,6 +22,11 @@ describe("ValidateEnvironment", () => {
       SWAGGER_LICENCE: "MIT",
       SWAGGER_PREFIX: "api",
       APP_PORT: 3000,
+      SALT_ROUND: 10,
+      JWT_SECRET: "supersecret",
+      JWT_TOKEN_AUDIENCE: "audience",
+      JWT_TOKEN_ISSUER: "issuer",
+      JWT_TOKEN_TTL: 3600,
     };
   });
 
@@ -33,20 +38,20 @@ describe("ValidateEnvironment", () => {
   });
 
   it("should throw an InternalServerErrorException when a required field is missing", () => {
-    delete config.DB_HOST; // Remove a required field
+    delete config.DB_HOST;
 
     expect(() => ValidatedEnv(config)).toThrow(InternalServerErrorException);
   });
 
   it("should throw an InternalServerErrorException when a field has an invalid type", () => {
-    config.DB_PORT = "invalid_port"; // Invalid type (should be a number)
+    config.DB_PORT = "invalid_port";
 
     expect(() => ValidatedEnv(config)).toThrow(InternalServerErrorException);
   });
 
   it("should log validation errors when validation fails", () => {
     const loggerSpy = jest.spyOn(Logger.prototype, "log");
-    delete config.DB_HOST; // Remove a required field to cause validation failure
+    delete config.DB_HOST;
 
     expect(() => ValidatedEnv(config)).toThrow(InternalServerErrorException);
     expect(loggerSpy).toHaveBeenCalledWith(
@@ -56,13 +61,13 @@ describe("ValidateEnvironment", () => {
   });
 
   it("should throw an exception when an integer field is negative", () => {
-    config.APP_PORT = -3000; // Invalid value (should be positive)
+    config.APP_PORT = -3000;
 
     expect(() => ValidatedEnv(config)).toThrow(InternalServerErrorException);
   });
 
   it("should throw an exception when a string field is empty", () => {
-    config.DB_HOST = ""; // Invalid value (should not be empty)
+    config.DB_HOST = "";
 
     expect(() => ValidatedEnv(config)).toThrow(InternalServerErrorException);
   });
