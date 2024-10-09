@@ -3,7 +3,12 @@ import { AuthenticationService } from "./authentication.service";
 import { CreateUserDto } from "../../users/dto/create-user.dto";
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { RefreshTokenDto } from "../dto/refresh-token.dto";
+import { AuthType } from "./enums/auth-type.enum";
+import { Auth } from "./decorator/auth.decorator";
+import { Throttle } from "@nestjs/throttler";
 
+@Throttle({ default: { limit: 5, ttl: 60 } }) // 5 request per minutes
+@Auth(AuthType.None)
 @ApiTags("Registration")
 @Controller()
 export class AuthenticationController {

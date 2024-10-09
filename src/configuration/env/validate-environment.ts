@@ -105,9 +105,17 @@ export function ValidatedEnv(config: Record<string, unknown>) {
   });
 
   if (errors.length > 0) {
+    const errorMessages = errors.map((error) => ({
+      field: error.property,
+      issues: Object.values(error.constraints || {}),
+    }));
+
     logger.log(`${errors.length} error(s) Failed validation`);
-    logger.log(`${JSON.stringify(errors)}`);
-    throw new InternalServerErrorException();
+    logger.log(`${JSON.stringify(errorMessages)}`);
+
+    throw new InternalServerErrorException(
+      `Configuration validation failed: ${JSON.stringify(errorMessages)}`
+    );
   }
   logger.log("😎 Environment Validation successfully validated 🍉");
 
