@@ -3,8 +3,9 @@ import { ConfigurationModule } from "./configuration/configuration.module";
 import { UsersModule } from "./users/users.module";
 import { TodoModule } from "./todo/todo.module";
 import { IamModule } from "./iam/iam.module";
-import { APP_PIPE } from "@nestjs/core";
+import { APP_GUARD, APP_PIPE } from "@nestjs/core";
 import { TransactionsModule } from "./transactions/transactions.module";
+import { AccessTokenGuard } from "./iam/authentication/guards/access-token/access-token.guard";
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { TransactionsModule } from "./transactions/transactions.module";
         },
       }),
     },
+    { provide: APP_GUARD, useClass: AccessTokenGuard },
   ],
 })
 export class AppModule {}
