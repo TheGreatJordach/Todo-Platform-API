@@ -6,6 +6,7 @@ import { RefreshTokenDto } from "../dto/refresh-token.dto";
 import { AuthType } from "./enums/auth-type.enum";
 import { Auth } from "./decorator/auth.decorator";
 import { Throttle } from "@nestjs/throttler";
+import { LoginUserDto } from "../../users/dto/login-user.dto";
 
 @Throttle({ default: { limit: 5, ttl: 60 } }) // 5 request per minutes
 @Auth(AuthType.None)
@@ -37,5 +38,15 @@ export class AuthenticationController {
   @Post("refresh-token")
   async refreshTokens(@Body() refreshToken: RefreshTokenDto) {
     return await this.authenticationService.refreshTokens(refreshToken);
+  }
+
+  @ApiOperation({ summary: "Login a user " })
+  @ApiResponse({ status: 200, description: "User successfully Logged in." })
+  @ApiBody({ type: LoginUserDto })
+  @HttpCode(HttpStatus.OK)
+  @Post("login")
+  async login(@Body() loginUserDto: LoginUserDto) {
+    const { email, password } = loginUserDto;
+    return this.authenticationService.login(email, password);
   }
 }

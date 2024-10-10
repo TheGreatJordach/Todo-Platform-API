@@ -1,0 +1,20 @@
+### LOGIN
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+
+  "email": "lewis18@doe.com",
+  "password": "Password@@2026"
+}
+
+
+### CREATE TODO
+POST http://localhost:3001/todos
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI3LCJlbWFpbCI6Imxld2lzMThAZG9lLmNvbSIsImlhdCI6MTcyODYwMDA4MiwiZXhwIjoxNzI4NjAzNjgyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEifQ.28HG0T7MRKzS2WQDvw8nWE99rfGqjeCRbrGBvM2j-YM
+
+{
+  "title": "Buy groceries",
+  "description": "Buy milk, eggs, and bread"
+}
