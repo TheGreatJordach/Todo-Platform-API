@@ -1,20 +1,15 @@
 import {
-  Body,
   ConflictException,
-  Inject,
   Injectable,
   Logger,
   UnauthorizedException,
 } from "@nestjs/common";
 import { CreateUserDto } from "../../users/dto/create-user.dto";
-
 import { UserService } from "../../users/managment/user.service";
 import { User } from "../../users/entity/user-entity";
 import { PasswordService } from "../password/password.service";
-import { JwtService } from "@nestjs/jwt";
-import { ConfigType } from "@nestjs/config";
-import jwtConfig from "../jwt/jwt.config";
-import { ActiveUserData } from "../interface/active-user-data.interface";
+import { JwtTokenProvider } from "../jwt-token.provider";
+import { Email } from "../../common/types/email";
 import { RefreshTokenDto } from "../dto/refresh-token.dto";
 
 @Injectable()
@@ -23,9 +18,7 @@ export class AuthenticationService {
   constructor(
     private readonly userService: UserService,
     private readonly passwordService: PasswordService,
-    private readonly jwtService: JwtService,
-    @Inject(jwtConfig.KEY)
-    private readonly jwtConfiguration: ConfigType<typeof jwtConfig>
+    private readonly jwtTokenProvider: JwtTokenProvider
   ) {}
 
   /**
@@ -87,7 +80,7 @@ export class AuthenticationService {
         password: hashedPassword,
       });
 
-      return await this.generateToken(storedUser);
+      return await this.jwtTokenProvider.generateToken(storedUser);
       //next: Generate token
       // return Token
       // store user to meilisearch
@@ -98,53 +91,23 @@ export class AuthenticationService {
     }
   }
 
-  private async signToken<T>(
-    userID: number,
-    expiresIn: number,
-    payload?: T
-  ): Promise<string> {
-    return await this.jwtService.signAsync(
-      {
-        sub: userID,
-        ...payload,
-      },
-      {
-        audience: this.jwtConfiguration.audience,
-        issuer: this.jwtConfiguration.issuer,
-        secret: this.jwtConfiguration.secret,
-        expiresIn: expiresIn,
-      }
-    );
-  }
-
-  async refreshTokens(@Body() refreshTokenDto: RefreshTokenDto) {
-    try {
-      const { sub } = await this.jwtService.verifyAsync<
-        Pick<ActiveUserData, "sub">
-      >(refreshTokenDto.refreshToken, {
-        secret: this.jwtConfiguration.secret,
-        audience: this.jwtConfiguration.audience,
-        issuer: this.jwtConfiguration.issuer,
-      });
-      const user: User = await this.userService.findUserById(sub);
-      return this.generateToken(user);
-    } catch (error) {
+  async login(email: Email, password: string) {
+    // Ovoid Conflict
+    const userAlreadyExist: User =
+      await this.userService.findUserByEmail(email);
+    if (!userAlreadyExist) {
       throw new UnauthorizedException();
     }
+    const isSamePassword: boolean = await this.passwordService.comparePassword(
+      password,
+      userAlreadyExist.password
+    );
+
+    if (!isSamePassword) throw new UnauthorizedException();
+    return await this.jwtTokenProvider.generateToken(userAlreadyExist);
   }
 
-  async generateToken(user: User) {
-    const [accessToken, refreshToken] = await Promise.all([
-      this.signToken<Partial<ActiveUserData>>(
-        user.id,
-        this.jwtConfiguration.accessTokenTtl,
-        { email: user.email }
-      ),
-      this.signToken(user.id, this.jwtConfiguration.accessTokenTtl),
-    ]);
-    return {
-      token: accessToken,
-      refreshToken: refreshToken,
-    };
+  async refreshTokens(refreshToken: RefreshTokenDto) {
+    return await this.jwtTokenProvider.refreshTokens(refreshToken);
   }
 }

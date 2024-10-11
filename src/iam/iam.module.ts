@@ -9,6 +9,7 @@ import { ConfigModule } from "@nestjs/config";
 import { APP_GUARD } from "@nestjs/core";
 import { AuthenticationGuard } from "./authentication/guards/authentication.guard";
 import { AccessTokenGuard } from "./authentication/guards/access-token/access-token.guard";
+import { JwtTokenProvider } from "./jwt-token.provider";
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AccessTokenGuard } from "./authentication/guards/access-token/access-to
     AuthenticationService,
     { provide: APP_GUARD, useClass: AuthenticationGuard },
     AccessTokenGuard,
+    JwtTokenProvider,
   ],
 })
 export class IamModule {}

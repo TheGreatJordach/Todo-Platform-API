@@ -5,7 +5,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -25,7 +25,7 @@ export class Todo {
   createdAt: Date;
   @UpdateDateColumn()
   updatedAt: Date;
-  @ManyToMany(() => User, (user) => user.todos)
+  @ManyToOne(() => User, (user) => user.todos)
   user: User;
 
   @AfterInsert()

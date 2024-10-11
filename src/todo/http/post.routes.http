@@ -1,0 +1,42 @@
+### LOGIN
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+
+  "email": "lewis18@doe.com",
+  "password": "Password@@2026"
+}
+
+
+### CREATE TODO
+POST http://localhost:3001/todos
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI3LCJlbWFpbCI6Imxld2lzMThAZG9lLmNvbSIsImlhdCI6MTcyODY3NTcwMywiZXhwIjoxNzI4Njc5MzAzLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEifQ.gwty4eJ8qCBfNWsxkhYhyZ0hUJnEanlrBIkUA_fx5h0
+
+{
+  "title": "Buy books",
+  "description": "Scala for the inpatients, typescript in action, python data science"
+}
+
+### Update TODO
+PUT http://localhost:3001/todos/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI3LCJlbWFpbCI6Imxld2lzMThAZG9lLmNvbSIsImlhdCI6MTcyODY3OTM4MiwiZXhwIjoxNzI4NjgyOTgyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEifQ.4WXhYpyBey_l9g9tEc_s-sw9LCRow8mIiKZjUJ5yEXo
+
+{
+  "title": "Buy 3 fakes groceries",
+  "description": "Buy fake milk, fake eggs, and fake bread"
+}
+
+### Update TODO
+DELETE http://localhost:3001/todos/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI3LCJlbWFpbCI6Imxld2lzMThAZG9lLmNvbSIsImlhdCI6MTcyODY3OTM4MiwiZXhwIjoxNzI4NjgyOTgyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEifQ.4WXhYpyBey_l9g9tEc_s-sw9LCRow8mIiKZjUJ5yEXo
+
+
+### all TODO
+GET http://localhost:3001/todos?page=1&limit=10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjI3LCJlbWFpbCI6Imxld2lzMThAZG9lLmNvbSIsImlhdCI6MTcyODY4NTYwMiwiZXhwIjoxNzI4Njg5MjAyLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEiLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjMwMDEifQ.1S1tehZB2eRhs-x72b0dr274xbKwNKtGPcj7XdAI82I
+
